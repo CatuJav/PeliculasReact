@@ -2,13 +2,15 @@ import { useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react'
 import { View, Text, Button } from 'react-native';
 import movieDB from '../api/movieDB';
+import { MovieDBNowPlaying } from '../interfaces/movieInterface';
 
 export const HomeScreen = () => {
 
     useEffect(() => {
-        movieDB.get('/now_playing')
+        /**Se pone el tipo de respuesta que puedo recibir */
+        movieDB.get<MovieDBNowPlaying>('/now_playing')
         .then((resp)=>{
-            console.log(JSON.stringify(resp.data,null,3));
+            console.log(JSON.stringify(resp.data.results[0].title,null,3));
         })
     }, [])
 
