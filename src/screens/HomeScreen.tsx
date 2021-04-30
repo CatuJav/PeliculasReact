@@ -1,19 +1,28 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react'
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ActivityIndicator } from 'react-native';
 import movieDB from '../api/movieDB';
 import { MovieDBNowPlaying } from '../interfaces/movieInterface';
+import { useMovies } from '../hooks/useMovies';
 
 export const HomeScreen = () => {
 
-    useEffect(() => {
-        /**Se pone el tipo de respuesta que puedo recibir */
-        movieDB.get<MovieDBNowPlaying>('/now_playing')
-        .then((resp)=>{
-            console.log(JSON.stringify(resp.data.results[0].title,null,3));
-        })
-    }, [])
-
+   const{peliculasEnCine,isLoading}=useMovies();
+   /**El error que aparece auqi se puede resolver poniendo ?
+    * El error aparecer porque en su momento el objeto es undefined
+   */
+    console.log(JSON.stringify(peliculasEnCine[2]?.title,null,3));
+    
+    if(isLoading){
+        return(
+        <View style={{
+            flex:1,
+            justifyContent:'center',
+            alignContent:'center'
+        }}>
+            <ActivityIndicator color='darkred' size={100}/>
+        </View> )
+    }
     const navigation=useNavigation();
     return (
         <View>
