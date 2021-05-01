@@ -1,5 +1,7 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Movie } from '../interfaces/movieInterface';
 
 /**La pelicula */
@@ -13,13 +15,19 @@ export const MoviePoster = ({movie, height=420, width=300}:Props) => {
     const uri=`https://image.tmdb.org/t/p/w500${movie.poster_path}`
 
     //console.log(movie.poster_path);
+
+    const navigation=useNavigation();
     return (
-        <View style={{
+        <TouchableOpacity style={{
             width:width,
             height:height,
             //backgroundColor:'green',
             marginHorizontal:8,
-        }}>
+        }}
+        activeOpacity={0.8}
+        /**Para la navegación y mando como parámetro la movie */
+        onPress={()=>navigation.navigate('DetailScreen',movie)}
+        >
             <View style={styles.imageContainer}>
             <Image
                 source={{uri:uri}}
@@ -27,7 +35,7 @@ export const MoviePoster = ({movie, height=420, width=300}:Props) => {
             />
 
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
