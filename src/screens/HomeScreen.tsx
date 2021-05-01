@@ -1,14 +1,18 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react'
-import { View, Text, Button, ActivityIndicator } from 'react-native';
+import { View, Text, Button, ActivityIndicator, useWindowDimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
+
+
 import movieDB from '../api/movieDB';
-import { MovieDBNowPlaying } from '../interfaces/movieInterface';
+import { MovieDBNowPlaying, Movie } from '../interfaces/movieInterface';
 import { useMovies } from '../hooks/useMovies';
 import { MoviePoster } from '../components/MoviePoster';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const HomeScreen = () => {
-
+    //Obtiene las dimensiones del dispositivo en tiempo real
+    const {width:windoWidth}=useWindowDimensions();
    const{peliculasEnCine,isLoading}=useMovies();
    //Para protegerse del notch
    const{top}=useSafeAreaInsets();
@@ -30,9 +34,20 @@ export const HomeScreen = () => {
     //const navigation=useNavigation();
     return (
         <View style={{marginTop:top+20}}>
-           <MoviePoster
-            movie={peliculasEnCine[2]}
-           />
+           {/* */}
+
+           
+           <View
+            style={{height:440}}
+           >
+            <Carousel
+                data={peliculasEnCine}
+                renderItem={({item}:any)=>(<MoviePoster movie={item}/>)}
+                sliderWidth={windoWidth}
+                itemWidth={300}
+            />
+            <Text>{windoWidth}</Text>
+           </View>
         </View>
     )
 }
