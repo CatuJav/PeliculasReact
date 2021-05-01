@@ -5,6 +5,7 @@ import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView } from '
 import { RootStackParams } from '../navigation/Navigation';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useMovieDetails } from '../hooks/useMovieDetails';
 /**Propiedades que extiende de StackScrenProos
  * que es de tipo RootStackParams de DetailScreen
  */
@@ -17,7 +18,9 @@ export const DetailScreen = ({route}:Props) => {
 
     const uri=`https://image.tmdb.org/t/p/w500${movie.poster_path}`
 
-    console.log(movie.title)
+    useMovieDetails(movie.id)
+    
+    
     return (
        <ScrollView>
             <View style={{...styles.imageContainer, height:height*0.7}}>
@@ -40,6 +43,8 @@ export const DetailScreen = ({route}:Props) => {
             size={20}
            />
         </View>
+
+        
        </ScrollView>
     )
 }
