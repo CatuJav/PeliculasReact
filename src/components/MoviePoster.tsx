@@ -22,7 +22,9 @@ export const MoviePoster = ({movie, height=420, width=300}:Props) => {
             width:width,
             height:height,
             //backgroundColor:'green',
-            marginHorizontal:8,
+            marginHorizontal:2,
+            paddingBottom:20,
+            paddingHorizontal:7
         }}
         activeOpacity={0.8}
         /**Para la navegación y mando como parámetro la movie */
