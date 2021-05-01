@@ -14,7 +14,7 @@ import { HorizontalSlider } from '../components/HorizontalSlider';
 export const HomeScreen = () => {
     //Obtiene las dimensiones del dispositivo en tiempo real
     const {width:windoWidth}=useWindowDimensions();
-   const{peliculasEnCine,peliculasPopulares,isLoading}=useMovies();
+   const{nowPlaying,popular,topRated,upcoming,isLoading}=useMovies();
    //Para protegerse del notch
    const{top}=useSafeAreaInsets();
    /**El error que aparece auqi se puede resolver poniendo ?
@@ -43,7 +43,7 @@ export const HomeScreen = () => {
             style={{height:440}}
            >
             <Carousel
-                data={peliculasEnCine}
+                data={nowPlaying}
                 renderItem={({item}:any)=>(<MoviePoster movie={item}/>)}
                 sliderWidth={windoWidth}
                 itemWidth={300}
@@ -51,9 +51,11 @@ export const HomeScreen = () => {
             />
            </View>
            {/**En cine*/}
-          <HorizontalSlider title='En cine' movies={peliculasEnCine}/>
-            {/**Peliculas populares */}
-        <HorizontalSlider title='Populares' movies={peliculasPopulares}/>
+            <HorizontalSlider title='En cine' movies={nowPlaying}/>
+                {/**Peliculas populares */}
+            <HorizontalSlider title='Populares' movies={popular}/>
+            <HorizontalSlider title='Top Rated' movies={topRated}/>
+            <HorizontalSlider title='Próximamente' movies={upcoming}/>
         
         </View>
         </ScrollView>

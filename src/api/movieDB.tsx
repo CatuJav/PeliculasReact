@@ -5,6 +5,7 @@ const movieDB=axios.create({
     params:{
         api_key:'84d2e43bc0e0f6a5fb8455b40b02284e',
         language:'es-ES',
+        //region:'EC'
     }
 })
 
