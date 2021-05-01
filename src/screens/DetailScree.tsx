@@ -4,6 +4,7 @@ import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView } from '
 //import { Movie } from '../interfaces/movieInterface';
 import { RootStackParams } from '../navigation/Navigation';
 
+import Icon from 'react-native-vector-icons/Ionicons';
 /**Propiedades que extiende de StackScrenProos
  * que es de tipo RootStackParams de DetailScreen
  */
@@ -20,14 +21,24 @@ export const DetailScreen = ({route}:Props) => {
     return (
        <ScrollView>
             <View style={{...styles.imageContainer, height:height*0.7}}>
-           <Image
-            source={{uri}}
-            style={styles.posterImage}
-           />
+           
+           <View style={styles.imageBorder}>
+            <Image
+                source={{uri}}
+                style={styles.posterImage}
+                />
+            </View>
         </View>
         <View style={styles.marginContainer}>
             <Text style={styles.subTitle}>{movie.original_title}</Text>
             <Text style={styles.title}>{movie.title}</Text>
+        </View>
+        <View style={styles.marginContainer}>
+           <Icon
+            name="star-outline"
+            color="grey"
+            size={20}
+           />
         </View>
        </ScrollView>
     )
@@ -35,6 +46,7 @@ export const DetailScreen = ({route}:Props) => {
 
 const styles = StyleSheet.create({
     imageContainer:{
+        //backgroundColor:'red',
         width:'100%',
         shadowColor: "green",
         shadowOffset: {
@@ -43,11 +55,17 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.24,
         shadowRadius: 7,
-
-        elevation: 10,
         borderBottomEndRadius:25,
         borderBottomStartRadius:25,
-        overflow:'hidden'
+        elevation: 10,
+        
+        
+    },
+    imageBorder:{
+        flex:1,
+        overflow:'hidden',
+        borderBottomEndRadius:25,
+        borderBottomStartRadius:25,
     },
     posterImage:{
         flex:1,
