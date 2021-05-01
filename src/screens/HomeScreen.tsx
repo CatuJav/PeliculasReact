@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react'
-import { View, Text, Button, ActivityIndicator, useWindowDimensions } from 'react-native';
+import { View, Text, Button, ActivityIndicator, useWindowDimensions, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 
@@ -9,6 +9,7 @@ import { MovieDBNowPlaying, Movie } from '../interfaces/movieInterface';
 import { useMovies } from '../hooks/useMovies';
 import { MoviePoster } from '../components/MoviePoster';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FlatList } from 'react-native';
 
 export const HomeScreen = () => {
     //Obtiene las dimensiones del dispositivo en tiempo real
@@ -33,6 +34,7 @@ export const HomeScreen = () => {
     }
     //const navigation=useNavigation();
     return (
+        <ScrollView>
         <View style={{marginTop:top+20}}>
            {/* */}
 
@@ -46,8 +48,25 @@ export const HomeScreen = () => {
                 sliderWidth={windoWidth}
                 itemWidth={300}
             />
-            <Text>{windoWidth}</Text>
            </View>
+           {/**Peliculas populares */}
+           <View style={{backgroundColor:'red', height:260}}>
+               <Text style={{fontSize:30, fontWeight:'bold'}}>En cine</Text>
+                <FlatList
+                    data={peliculasEnCine}
+                    renderItem={({item}:any)=>(
+                        <MoviePoster movie={item}
+                                    height={200}
+                                    width={140}
+                        />
+                    )}
+                    keyExtractor={(item)=>item.id.toString()}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                />
+           </View>
+
         </View>
+        </ScrollView>
     )
 }
