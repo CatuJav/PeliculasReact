@@ -1,21 +1,20 @@
-import { useNavigation } from '@react-navigation/core';
-import React, { useEffect } from 'react'
-import { View, Text, Button, ActivityIndicator, useWindowDimensions, ScrollView } from 'react-native';
+
+import React from 'react'
+import { View, ActivityIndicator, useWindowDimensions, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 
-import movieDB from '../api/movieDB';
-import { MovieDBNowPlaying, Movie } from '../interfaces/movieInterface';
+
 import { useMovies } from '../hooks/useMovies';
 import { MoviePoster } from '../components/MoviePoster';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { FlatList } from 'react-native';
+
 import { HorizontalSlider } from '../components/HorizontalSlider';
 
 export const HomeScreen = () => {
     //Obtiene las dimensiones del dispositivo en tiempo real
     const {width:windoWidth}=useWindowDimensions();
-   const{peliculasEnCine,isLoading}=useMovies();
+   const{peliculasEnCine,peliculasPopulares,isLoading}=useMovies();
    //Para protegerse del notch
    const{top}=useSafeAreaInsets();
    /**El error que aparece auqi se puede resolver poniendo ?
@@ -54,7 +53,8 @@ export const HomeScreen = () => {
            {/**En cine*/}
           <HorizontalSlider title='En cine' movies={peliculasEnCine}/>
             {/**Peliculas populares */}
-
+        <HorizontalSlider title='Populares' movies={peliculasPopulares}/>
+        
         </View>
         </ScrollView>
     )
