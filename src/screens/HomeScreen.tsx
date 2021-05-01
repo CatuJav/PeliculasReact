@@ -10,6 +10,7 @@ import { useMovies } from '../hooks/useMovies';
 import { MoviePoster } from '../components/MoviePoster';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native';
+import { HorizontalSlider } from '../components/HorizontalSlider';
 
 export const HomeScreen = () => {
     //Obtiene las dimensiones del dispositivo en tiempo real
@@ -47,24 +48,12 @@ export const HomeScreen = () => {
                 renderItem={({item}:any)=>(<MoviePoster movie={item}/>)}
                 sliderWidth={windoWidth}
                 itemWidth={300}
+                inactiveSlideOpacity={0.9}
             />
            </View>
-           {/**Peliculas populares */}
-           <View style={{backgroundColor:'red', height:260}}>
-               <Text style={{fontSize:30, fontWeight:'bold'}}>En cine</Text>
-                <FlatList
-                    data={peliculasEnCine}
-                    renderItem={({item}:any)=>(
-                        <MoviePoster movie={item}
-                                    height={200}
-                                    width={140}
-                        />
-                    )}
-                    keyExtractor={(item)=>item.id.toString()}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                />
-           </View>
+           {/**En cine*/}
+          <HorizontalSlider title='En cine' movies={peliculasEnCine}/>
+            {/**Peliculas populares */}
 
         </View>
         </ScrollView>
