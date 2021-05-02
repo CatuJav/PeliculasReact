@@ -5,7 +5,7 @@ import { useFade } from '../hooks/useFade';
 
 export const FadeScreen = () => {
 
-    const {fadeIn,fadeOut,opcaity}=useFade();
+    const {fadeIn,fadeOut,opacaity}=useFade();
     
     return (
         <View style={{
@@ -21,7 +21,7 @@ export const FadeScreen = () => {
                 borderColor:'white',
                 borderWidth:10,
                 marginBottom:10,
-                opacity:opcaity,
+                opacity:opacaity,
             }}>
 
             </Animated.View>

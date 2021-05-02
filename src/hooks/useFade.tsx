@@ -6,13 +6,13 @@ export const useFade = () => {
 
         //Creamos la opcidad desde cero usando la opacidad
     //Ademas las propiedades pueden recibir datos de tipo Animated.value
-    const opcaity = useRef(new Animated.Value(0)).current
+    const opacaity = useRef(new Animated.Value(0)).current
 
     /**Función para cambiar el valor de la opacidad */
-    const fadeIn=()=>{
+    const fadeIn=(callback?:Function)=>{
         /**Para manerjar el tiempo */
         Animated.timing(
-            opcaity,
+            opacaity,
             {
                 //Va a ir al valor 1
                 toValue:1,
@@ -20,17 +20,17 @@ export const useFade = () => {
                 //Para aceleración por hardware
                 useNativeDriver:true
             }
-        ).start();
+        ).start(()=>callback?callback():null);
     }
     /**Función para el fadeOut */        
-    const fadeOut=()=>{
+    const fadeOut=(duration:number=300)=>{
         /**Para manerjar el tiempo */
         Animated.timing(
-            opcaity,
+            opacaity,
             {
                 //Va a ir al valor 0
                 toValue:0,
-                duration:300,
+                duration:duration,
                 //Para aceleración por hardware
                 useNativeDriver:true
             }
@@ -40,7 +40,7 @@ export const useFade = () => {
 
     return (
         {
-            opcaity,
+            opacaity,
             fadeOut,
             fadeIn
         }
