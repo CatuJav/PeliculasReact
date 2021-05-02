@@ -18,7 +18,7 @@ export const DetailScreen = ({route}:Props) => {
 
     const uri=`https://image.tmdb.org/t/p/w500${movie.poster_path}`
 
-    useMovieDetails(movie.id)
+    const { cast,isLoading,movieFull}=useMovieDetails(movie.id)
     
     
     return (
