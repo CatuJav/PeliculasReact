@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native';
 import currencyFormater from 'currency-formatter';
+import { CastItem } from './CastItem';
 
 import { MovieFull } from '../interfaces/movieInterface';
 import { Cast } from '../interfaces/creditsInterface';
@@ -34,6 +35,13 @@ export const MovieDetails = ({movieFull,cast}:Props) => {
                     Presupuesto</Text>
                 <Text style={{fontSize:16, textAlign:'justify'}}>
                     {currencyFormater.format(movieFull.budget,{code:'USD'})}</Text>
+            </View>
+            {/**Casting */}
+            <View style={{marginTop:10, marginBottom:100}}>
+            <Text style={{fontSize:23, marginTop:10, fontWeight:'bold', marginHorizontal:20,}}>
+                    Actores</Text>
+                <CastItem actor={cast[0]}/>
+
             </View>
         </>
     )
