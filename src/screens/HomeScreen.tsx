@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { HorizontalSlider } from '../components/HorizontalSlider';
 import { GradientBackground } from '../components/GradientBackground';
+import { getImageColors } from '../helpers/getColores';
 
 export const HomeScreen = () => {
     //Obtiene las dimensiones del dispositivo en tiempo real
@@ -28,8 +29,8 @@ export const HomeScreen = () => {
         const movie=nowPlaying[index];
         const uri= `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         
-        const colors = await ImageColors.getColors(uri, {})
-        console.log(colors)
+        const [primary,secondary]=await getImageColors(uri);
+        console.log(primary,secondary)
     }
 
     if(isLoading){
