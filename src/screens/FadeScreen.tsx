@@ -1,28 +1,12 @@
 import React, { useRef } from 'react'
 import { View, Animated, Button } from 'react-native';
+import { useFade } from '../hooks/useFade';
 
 
 export const FadeScreen = () => {
 
-    //Creamos la opcidad desde cero usando la opacidad
-    //Ademas las propiedades pueden recibir datos de tipo Animated.value
-    const opcaity = useRef(new Animated.Value(0)).current
-
-    /**Función para cambiar el valor de la opacidad */
-    const fadeIn=()=>{
-        /**Para manerjar el tiempo */
-        Animated.timing(
-            opcaity,
-            {
-                //Va a ir al valor 1
-                toValue:1,
-                duration:1000,
-                //Para aceleración por hardware
-                useNativeDriver:true
-            }
-        ).start();
-    }
-
+    const {fadeIn,fadeOut,opcaity}=useFade();
+    
     return (
         <View style={{
             flex:1,
@@ -44,6 +28,10 @@ export const FadeScreen = () => {
             <Button
                 title='FadeIN'
                 onPress={()=>fadeIn()}
+            />
+            <Button
+                title='FadeOut'
+                onPress={()=>fadeOut()}
             />
         </View>
     )
