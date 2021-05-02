@@ -3,7 +3,7 @@ import React from 'react'
 import { View, ActivityIndicator, useWindowDimensions, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
-
+import ImageColors from "react-native-image-colors";
 
 import { useMovies } from '../hooks/useMovies';
 import { MoviePoster } from '../components/MoviePoster';
@@ -23,6 +23,15 @@ export const HomeScreen = () => {
    */
     //console.log(JSON.stringify(peliculasEnCine[2]?.title,null,3));
     
+    //Funcion para obtener el color según el indice de la imagen
+    const getPosterColors= async(index:number)=>{
+        const movie=nowPlaying[index];
+        const uri= `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        
+        const colors = await ImageColors.getColors(uri, {})
+        console.log(colors)
+    }
+
     if(isLoading){
         return(
         <View style={{
@@ -50,6 +59,8 @@ export const HomeScreen = () => {
                     sliderWidth={windoWidth}
                     itemWidth={300}
                     inactiveSlideOpacity={0.9}
+                    /**Para obtener la imagen en la que se encuentra */
+                    onSnapToItem={index=>getPosterColors(index)}
                 />
             </View>
             {/**En cine*/}
