@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { GradientContext } from '../context/GradientContext';
 
 interface Props{
     //Recibe los hijos
     children:JSX.Element| JSX.Element[]
 }
 export const GradientBackground = ({children}:Props) => {
+
+    const {colors,prevColors} = useContext(GradientContext);
+
     return (
         <View 
             style={{
@@ -15,7 +19,7 @@ export const GradientBackground = ({children}:Props) => {
             }}
         >
             <LinearGradient
-                colors={["#084f6a","#75CEDB","white"]}
+                colors={[colors.primary,colors.secondary,"white"]}
                 //Para cambiar el angulo de donde empieze el gradiente
                 start={{x:0.1,y:0.1}}
                 //Para cambiar el angulo de donde termine el gradiente

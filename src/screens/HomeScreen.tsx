@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, ActivityIndicator, useWindowDimensions, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { HorizontalSlider } from '../components/HorizontalSlider';
 import { GradientBackground } from '../components/GradientBackground';
 import { getImageColors } from '../helpers/getColores';
+import { GradientContext } from '../context/GradientContext';
 
 export const HomeScreen = () => {
     //Obtiene las dimensiones del dispositivo en tiempo real
@@ -19,6 +20,8 @@ export const HomeScreen = () => {
    const{nowPlaying,popular,topRated,upcoming,isLoading}=useMovies();
    //Para protegerse del notch
    const{top}=useSafeAreaInsets();
+   //Par ocupar los colores
+   const {setMainColors} = useContext(GradientContext);
    /**El error que aparece auqi se puede resolver poniendo ?
     * El error aparecer porque en su momento el objeto es undefined
    */
@@ -29,8 +32,9 @@ export const HomeScreen = () => {
         const movie=nowPlaying[index];
         const uri= `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         
-        const [primary,secondary]=await getImageColors(uri);
-        console.log(primary,secondary)
+        //Igualamos las constantes para que quite el error de que son undefined
+        const [primary='green',secondary='orange']=await getImageColors(uri);
+        setMainColors({primary:primary,secondary:secondary})
     }
 
     if(isLoading){
