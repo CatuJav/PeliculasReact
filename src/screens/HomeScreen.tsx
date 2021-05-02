@@ -10,6 +10,7 @@ import { MoviePoster } from '../components/MoviePoster';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { HorizontalSlider } from '../components/HorizontalSlider';
+import { GradientBackground } from '../components/GradientBackground';
 
 export const HomeScreen = () => {
     //Obtiene las dimensiones del dispositivo en tiempo real
@@ -34,6 +35,7 @@ export const HomeScreen = () => {
     }
     //const navigation=useNavigation();
     return (
+        <GradientBackground>
         <ScrollView>
         <View style={{marginTop:top+20}}>
            {/* */}
@@ -59,5 +61,6 @@ export const HomeScreen = () => {
         
         </View>
         </ScrollView>
+        </GradientBackground>
     )
 }
