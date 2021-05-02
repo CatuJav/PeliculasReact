@@ -36,31 +36,31 @@ export const HomeScreen = () => {
     //const navigation=useNavigation();
     return (
         <GradientBackground>
-        <ScrollView>
-        <View style={{marginTop:top+20}}>
-           {/* */}
+            <ScrollView>
+            <View style={{marginTop:top+20}}>
+            {/* */}
 
-           
-           <View
-            style={{height:440}}
-           >
-            <Carousel
-                data={nowPlaying}
-                renderItem={({item}:any)=>(<MoviePoster movie={item}/>)}
-                sliderWidth={windoWidth}
-                itemWidth={300}
-                inactiveSlideOpacity={0.9}
-            />
-           </View>
-           {/**En cine*/}
-            <HorizontalSlider title='En cine' movies={nowPlaying}/>
-                {/**Peliculas populares */}
-            <HorizontalSlider title='Populares' movies={popular}/>
-            <HorizontalSlider title='Top Rated' movies={topRated}/>
-            <HorizontalSlider title='Próximamente' movies={upcoming}/>
-        
-        </View>
-        </ScrollView>
+            
+            <View
+                style={{height:440}}
+            >
+                <Carousel
+                    data={nowPlaying}
+                    renderItem={({item}:any)=>(<MoviePoster movie={item}/>)}
+                    sliderWidth={windoWidth}
+                    itemWidth={300}
+                    inactiveSlideOpacity={0.9}
+                />
+            </View>
+            {/**En cine*/}
+                <HorizontalSlider title='En cine' movies={nowPlaying}/>
+                    {/**Peliculas populares */}
+                <HorizontalSlider title='Populares' movies={popular}/>
+                <HorizontalSlider title='Top Rated' movies={topRated}/>
+                <HorizontalSlider title='Próximamente' movies={upcoming}/>
+            
+            </View>
+            </ScrollView>
         </GradientBackground>
     )
 }
