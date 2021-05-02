@@ -7,11 +7,12 @@ import { RootStackParams } from '../navigation/Navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useMovieDetails } from '../hooks/useMovieDetails';
 import { MovieDetails } from '../components/MovieDetails';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 /**Propiedades que extiende de StackScrenProos
  * que es de tipo RootStackParams de DetailScreen
  */
 interface Props extends StackScreenProps<RootStackParams,'DetailScreen'>{}
-export const DetailScreen = ({route}:Props) => {
+export const DetailScreen = ({route,navigation}:Props) => {
     
     const {height}=useWindowDimensions();
     //Trata los parametros como Movie
@@ -24,6 +25,9 @@ export const DetailScreen = ({route}:Props) => {
     
     return (
        <ScrollView>
+
+           
+
             <View style={{...styles.imageContainer, height:height*0.7}}>
            
            <View style={styles.imageBorder}>
@@ -32,6 +36,20 @@ export const DetailScreen = ({route}:Props) => {
                 style={styles.posterImage}
                 />
             </View>
+         {/**Botón para cerrar */}
+         <View style={styles.backButton}>
+         <TouchableOpacity 
+            onPress={()=>navigation.pop()}
+         >
+            <Icon
+                color='#ffffff'
+                name='arrow-back-outline'
+                size={60}
+                
+            />
+         </TouchableOpacity>
+
+         </View>
         </View>
         <View style={styles.marginContainer}>
             <Text style={styles.subTitle}>{movie.original_title}</Text>
@@ -53,7 +71,7 @@ export const DetailScreen = ({route}:Props) => {
            }
 
 
-        
+       
        </ScrollView>
     )
 }
@@ -96,5 +114,14 @@ const styles = StyleSheet.create({
     title:{
         fontSize:20,
         fontWeight:'bold',
+    },
+    backButton:{
+       position:'absolute',
+        zIndex:999,
+        elevation:9,
+        top:30,
+        left:5,
+        
+        
     }
 });
