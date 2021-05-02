@@ -14,11 +14,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 interface Props extends StackScreenProps<RootStackParams,'DetailScreen'>{}
 export const DetailScreen = ({route,navigation}:Props) => {
     
-    const {height}=useWindowDimensions();
+    const {height,width}=useWindowDimensions();
     //Trata los parametros como Movie
     const movie = route.params;
 
-    const uri=`https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    const uriPoster=`https://image.tmdb.org/t/p/original${movie.poster_path}`
+    const uriBackDrop=`https://image.tmdb.org/t/p/original${movie.backdrop_path}`
 
     const { cast,isLoading,movieFull}=useMovieDetails(movie.id)
     
@@ -32,7 +33,9 @@ export const DetailScreen = ({route,navigation}:Props) => {
            
            <View style={styles.imageBorder}>
             <Image
-                source={{uri}}
+                source={{
+                    uri:(width>height)?uriBackDrop:uriPoster
+                }}
                 style={styles.posterImage}
                 />
             </View>
